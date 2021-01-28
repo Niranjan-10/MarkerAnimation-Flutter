@@ -1,117 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:marker_animation/screens/map_animation.dart';
+import 'package:marker_animation/screens/map_socket_.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MapSocketConnection(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class JwtTokenPayloadFetch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    String yourToken =
+        "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjdUh4ZjlDM3dUWllkVDJva2d1Z0VqdFByeHpiZ0N6VmFJWTFVekdXckhBIn0.eyJleHAiOjE2MTA5NDg3OTksImlhdCI6MTYxMDk0ODYxOSwianRpIjoiZWMxNDJhOTUtNmMwMi00OWZhLThhMjQtODAzYWZiZTUzNTFmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDkwL2F1dGgvcmVhbG1zL3Njb3JwaW91c19mbGVldCIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYWNjb3VudCJdLCJzdWIiOiI1YjYzZDkxMS1hMWExLTQwYWEtYmEzMC1hNzNjMTE4ODU3YjciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJzcHJpbmdib290LW1pY3Jvc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiI2NDM3MzI1Zi03NjZhLTRlODYtYmI2Yy04MDEyOGMzNThlNWUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIlJPTEVfVVNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiUk9MRV9BRE1JTiIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJzcHJpbmdib290LW1pY3Jvc2VydmljZSI6eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJ1bWFfcHJvdGVjdGlvbiIsImFkbWluIiwiUk9MRV9BRE1JTiIsInVzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiU3JpZGhhciBQYXJpZGEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzcmlkaGFyIiwiZ2l2ZW5fbmFtZSI6IlNyaWRoYXIiLCJmYW1pbHlfbmFtZSI6IlBhcmlkYSIsImVtYWlsIjoic3BhcmlkYUBhc2ljemVuLmNvbSJ9.E6FQ5IWl6fLw4egUQ3fHULe6zz7edFFrfftZ8MSZ5WmCLRZMmCgF8GUssQEpSltj_3kW-FK8lGVzJNoU0RCsPmf4XWqHgxvFpTWIX6miHFF2cmkbtA3Ry35q3CUeFzilDfOPeSFi5KvvAeGjK6oBadKAlvKKNQbArzfGhQOAeJLcBNNOD9XMxPBRxvZksG9t1bCEu9kmsMuJgb-GNiCT3gIyHyKCd6qIVRfzhZ5ekrCepiX2xQd1-0HkJ24ZalZk7LeztWDp_3D6Xha_j4YrpxLq9gPuDK9frhHPoL9N76E-2rx5Z12N0VOJlfPaBiymbWh50qRp1y14jkKvCeJ_7w";
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+    print(decodedToken);
+    // var dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(1610868011000.toString(), true);
+    var date = DateTime.fromMillisecondsSinceEpoch(1610868011000);
+    var format = DateFormat.yMMMEd().format(date);
+    var time = TimeOfDay.fromDateTime(date);
+    print(format.toString());
+    print(time.hour);
+    print(time.minute);
+
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Container(),
     );
   }
 }

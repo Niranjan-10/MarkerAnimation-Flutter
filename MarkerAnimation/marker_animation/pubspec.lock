@@ -43,6 +43,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.13"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -62,11 +76,67 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_animarker:
+    dependency: "direct main"
+    description:
+      name: flutter_animarker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1+1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.33"
+  google_maps_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.12.2"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.4"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
+  jwt_decoder:
+    dependency: "direct main"
+    description:
+      name: jwt_decoder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   matcher:
     dependency: transitive
     description:
@@ -88,6 +158,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.9.0"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -107,6 +191,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.5"
+  stomp_dart_client:
+    dependency: "direct main"
+    description:
+      name: stomp_dart_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.7"
   stream_channel:
     dependency: transitive
     description:
@@ -114,6 +205,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   string_scanner:
     dependency: transitive
     description:
@@ -149,5 +247,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.8"
+  web_socket_channel:
+    dependency: transitive
+    description:
+      name: web_socket_channel
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
 sdks:
   dart: ">=2.9.0-14.0.dev <3.0.0"
+  flutter: ">=1.16.3 <2.0.0"
